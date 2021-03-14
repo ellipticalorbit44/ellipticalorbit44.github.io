@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-.myDiv {
-  border: 5px outset red;
-  background-color: lightblue;    
-  text-align: center;
-}
-</style>
-</head>
-<body>
-
-<h1>The div element</h1>
-
 <div id="glowscript" class="glowscript">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
@@ -28,7 +13,7 @@
 async function __main__() {
 "use strict";
 
-    var version, display, vector, print, arange, __name__, type, scene, RS_ls, cr_radius, output_text, rt, cr, small_cr, rt_area, cr_area, i, randx, randy, circle_amount, square_amount, len;
+    var version, display, vector, print, arange, __name__, type, scene, RS_ls, cr_radius, rt_area, cr_area, gd, i, runtime, randx, randy, circle_amount, square_amount, cr1, cr2, rt1, rt2, rt3, rt4, cr_pts, rt_pts, x, leng, percent_done;
     version = RS_list_decorate([ "3.0", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
@@ -40,70 +25,113 @@ async function __main__() {
     __name__ = "__main__";
     type = pytype;
     scene = canvas();
-    "27";
+    "2";
+    RS_interpolate_kwargs.call(this, print_options, [RS_desugar_kwargs({width: 600, height: 200})]);
+    "3";
+    RS_interpolate_kwargs.call(this, print_options, [RS_desugar_kwargs({digits: 5})]);
+    "22";
     cr_radius = 1;
-    "29";
-    output_text = RS_interpolate_kwargs.call(this, label, [RS_desugar_kwargs({pos: vec(0, 0, 0), text: "<insert stuff here>", color: color.white, xoffset: 150, yoffset: 100})]);
-    "30";
-    rt = RS_interpolate_kwargs.call(shapes, shapes.rectangle, [RS_desugar_kwargs({width: cr_radius["*"](2), height: cr_radius["*"](2)})]);
-    "31";
-    cr = RS_interpolate_kwargs.call(shapes, shapes.circle, [RS_desugar_kwargs({radius: cr_radius})]);
-    "32";
-    small_cr = RS_interpolate_kwargs.call(shapes, shapes.circle, [RS_desugar_kwargs({radius: .01})]);
-    "35";
-    RS_interpolate_kwargs.call(this, extrusion, [RS_desugar_kwargs({path: RS_list_decorate([ vec(0, 0, 1e-4["-u"]()), vec(0, 0, .1["-u"]()) ]), shape: rt, color: color.white})]);
-    "36";
-    RS_interpolate_kwargs.call(this, extrusion, [RS_desugar_kwargs({path: RS_list_decorate([ vec(0, 0, 0), vec(0, 0, .1["-u"]()) ]), shape: cr, color: color.red})]);
-    "38";
+    "24";
     rt_area = cr_radius["*"](2)["*"](cr_radius)["*"](2);
-    "39";
+    "25";
     cr_area = pi["*"](cr_radius["**"](2));
-    "42";
+    "28";
+    gd = RS_interpolate_kwargs.call(this, graph, [RS_desugar_kwargs({width: 600, height: 600, title: "<b>π estimation with area<\/b>", foreground: vec(.5, .5, .5), background: vec(.05, .05, .05), xmin: 2["-u"](), xmax: 2, ymin: 2["-u"](), ymax: 2})]);
+    "33";
     i = 0;
-    "43";
+    "34";
+    runtime = 1e5;
+    "35";
     randx = 0;
-    "44";
+    "36";
     randy = 0;
-    "45";
+    "37";
     circle_amount = 0;
-    "46";
+    "38";
     square_amount = 0;
-    "47";
-    while (i["<"](1e9)) {
-        "48";
-        RS_interpolate_kwargs.call(this, print_options, [RS_desugar_kwargs({clear: true})]);
-        "49";
-        print(" Debug: randx:", randx, "\n", "Debug: randy:", randy, "\n", "Debug: len:", len, "\n", "circle_amount:", circle_amount, "\n", "square_amount:", square_amount);
-        "50";
-        (await rate(1e5));
-        "51";
-        randx = random()["*"](2)["*"](cr_radius)["-"](cr_radius);
+    "40";
+    cr1 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.red})]);
+    "41";
+    cr2 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.red})]);
+    "43";
+    rt1 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.white})]);
+    "44";
+    rt2 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.white})]);
+    "45";
+    rt3 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.white})]);
+    "46";
+    rt4 = RS_interpolate_kwargs.call(this, gcurve, [RS_desugar_kwargs({color: color.white})]);
+    "48";
+    cr_pts = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.blue})]);
+    "49";
+    rt_pts = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.green})]);
+    "51";
+    for (var RS_Index0 = 1["-u"](); RS_Index0["<"](1); RS_Index0=RS_Index0["+"](.001)) {
+        x = RS_Index0;
         "52";
-        randy = random()["*"](2)["*"](cr_radius)["-"](cr_radius);
-        "54";
-        len = sqrt(randx["**"](2)["+"](randy["**"](2)));
+        cr1.plot(x, sqrt(cr_radius["**"](2)["-"](x["**"](2))));
+        "53";
+        cr2.plot(x, sqrt(cr_radius["**"](2)["-"](x["**"](2)))["-u"]());
+        "55";
+        rt1.plot(1, x);
         "56";
-        if (len["<"](1)) {
-            "57";
-            circle_amount=circle_amount["+"](1);
-            "58";
-            RS_interpolate_kwargs.call(this, extrusion, [RS_desugar_kwargs({path: RS_list_decorate([ vec(randx, randy, 0), vec(randx, randy, .09["-u"]()) ]), shape: small_cr, color: color.blue})]);
-            "59";
-        } else if (len[">"](1)) {
-            "60";
-            RS_interpolate_kwargs.call(this, extrusion, [RS_desugar_kwargs({path: RS_list_decorate([ vec(randx, randy, 0), vec(randx, randy, .09["-u"]()) ]), shape: small_cr, color: color.green})]);
-        }
+        rt2.plot(1["-u"](), x);
+        "57";
+        rt3.plot(x, 1);
+        "58";
+        rt4.plot(x, 1["-u"]());
+    }
+    "60";
+    while (i["<"](runtime)) {
         "61";
-        square_amount=square_amount["+"](1);
+        (await rate(1e4));
         "62";
-        output_text.text = circle_amount["/"](square_amount)["*"](4);
-        "65";
-        print("\n randx:", randx, "\n", "randy:", randy, "\n", "len:", len, "\n", "circle_amount:", circle_amount, "\n", "square_amount:", square_amount);
+        randx = random()["*"](2)["*"](cr_radius)["-"](cr_radius);
+        "63";
+        randy = random()["*"](2)["*"](cr_radius)["-"](cr_radius);
+        "64";
+        leng = sqrt(randx["**"](2)["+"](randy["**"](2)));
         "66";
+        RS_interpolate_kwargs.call(this, print_options, [RS_desugar_kwargs({clear: true})]);
+        "68";
+        if (i["<"](3e3)) {
+            "69";
+            if (leng["<"](1)) {
+                "70";
+                circle_amount=circle_amount["+"](1);
+                "71";
+                RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.blue})]).plot(randx, randy);
+                "72";
+            } else if (leng[">"](1)) {
+                "73";
+                RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.green})]).plot(randx, randy);
+            }
+            "74";
+            square_amount=square_amount["+"](1);
+            "76";
+            percent_done = round(100["*"](100)["*"](i)["/"](runtime))["/"](100);
+            "77";
+            print("Working...\nPercent done: ", percent_done, "%\nCurrent π estimation: ", circle_amount["/"](square_amount)["*"](4));
+            "78";
+        }
+        if (i[">"](3e3)) {
+            "79";
+            if (leng["<"](1)) {
+                "80";
+                circle_amount=circle_amount["+"](1);
+            }
+            "81";
+            square_amount=square_amount["+"](1);
+            "83";
+            percent_done = round(100["*"](100)["*"](i)["/"](runtime))["/"](100);
+            "84";
+            print("NOTICE: visual accumulation disabled for calculation speed\nPercent done: ", percent_done, "%\nCurrent π estimation: ", circle_amount["/"](square_amount)["*"](4));
+        }
+        "86";
         i=i["+"](1);
     }
-    "68";
-    print("done!\ni final = ", i);
+    "89";
+    print("done!\nπ final ≈", circle_amount["/"](square_amount)["*"](4));
 };
 if (!__main__.__module__) Object.defineProperties(__main__, {
     __module__ : {value: "__main__"}
@@ -114,8 +142,3 @@ if (!__main__.__module__) Object.defineProperties(__main__, {
 
 //--><!]]></script>
 </div>
-
-<p>This is some text outside the div element.</p>
-
-</body>
-</html>
